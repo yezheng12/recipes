@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {{bootstrap.load_css()}}
+</head>
+<body>
+    <div class="container-xl my-3">
+        <div class="d-flex justify-content-between">
+            <h1>Edit {{this_car.model}}!</h1>
+            <div class="d-flex justify-content-between">
+                <a href="/dashboard" class="mx-2">back to recipes</a>
+                <a href="/logout">logout</a>
+            </div>
+        </div>
+        <form action="/edit_process/{{this_car.id}}" class="d-flex justify-content-around" method="post">
+            {% with messages = get_flashed_messages(category_filter = ['creator']) %}
+                {% if messages %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Flash AHHHHHHH!!!!</strong>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    </div>              
+                {% endif %}
+            {% endwith %}
+            <div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" cols="40" rows="10" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="instruction">Instructions</label>
+                    <textarea name="instruction" id="instruction" cols="40" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="date_made">Date Cooked/Made:</label>
+                    <input type="date" name='date_made' id="date_made">
+                </div>
+                <div class="my-3">
+                    <p>Under 30 minutes?</p> 
+                    <div>
+                        <label for="true">Yes</label>
+                        <input type="radio" value="1" name="under">
+                    </div>
+                    <div>
+                        <label for="false">No</label>
+                        <input type="radio" value="0" name="under">
+                    </div>
+                </div>
+                <input type="submit" value="submit">
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
